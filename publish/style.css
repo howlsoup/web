@@ -1,0 +1,443 @@
+body {
+  background: url(pattern.webp) #ffa68d center / 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Pretendard', 'NanumGothic', 'Malgun Gothic', sans-serif;
+  font-weight: medium;
+}
+
+div.padding{
+  opacity: 0.5;
+  height: 30px;
+  background: red;
+  width: 100%;
+  margin: 0 10px;
+}
+
+.page {
+  background-color: #ff6d4959;
+  border-radius: 6px;
+  width: 700px;
+  /* height: 950px; */
+  position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  padding: 40px;
+  padding-top: 50px;
+  margin: 20px 0;
+}
+
+
+
+/* HEADER > LOGO */
+header.pc {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: relative;
+  transform: translatey(-20px);
+}
+
+header.pc .logo img{
+  height: 140px;
+  margin-left: 25px;
+  /* -webkit-filter: drop-shadow(5px 5px 5px #222);
+  filter: drop-shadow(5px 5px 5px #222); */
+}
+
+.date {
+  transform: translateY(-13px);
+  position: absolute;
+  text-align: center;
+  font-size: 1em;
+  color: #000;
+}
+header.mobile{
+  display: none;
+}
+
+
+
+
+
+
+/* HEADER > MENU */
+
+/* --- BASIC RESET --- */
+/* * { box-sizing: border-box; margin: 0; padding: 0; }
+body { padding: 40px; font-family: sans-serif; } */
+
+/* --- WRAPPER --- */
+nav {
+  width: 350px;
+  margin-top: 18px;
+}
+
+/* --- HIDE RADIO BUTTONS --- */
+nav input[type="radio"] {
+  display: none;
+}
+
+/* --- TAB LABEL STYLE --- */
+nav .tab-label {
+  display: inline-block;
+  padding:5px 1px;
+  /* padding: 6px 20px; */
+  margin: -2px;
+  color: black;
+  border-radius: 10px 10px 0px 0px; 
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  position: relative;
+  transform: translatey(-5px);
+  transition: transform 0.25s ease, z-index 0.2s;
+  z-index: 1;
+}
+nav .tab-label:first-of-type{
+  margin-left: 15px;
+}
+
+/* --- COLORS FOR EACH TAB --- */
+/* nav #cat1 + label { background: #d4a300; color: #d4a300; }
+nav #cat2 + label { background: #00d800; color: #00d800; }
+nav #cat3 + label { background: #c7dc00; color: #c7dc00; }
+nav #cat4 + label { background: #4a5cff; color: #4a5cff; } */
+nav input[type=radio] + label {border:black 1px solid; background:white;}
+
+/* restore readable text inside */
+nav .tab-label span {
+  position: relative;
+  color: black;
+  margin:8px;
+  z-index: 2;
+}
+
+/* --- WHEN SELECTED (POP EFFECT) --- */
+nav input[type="radio"]:checked + .tab-label {
+  transform: translateY(20px);
+  /* z-index: 5; */
+}
+
+/* --- CONTENT BOX --- */
+nav .tab-content {
+  position: absolute;
+  width:330px;
+  background: #ffa956;
+  border-radius: 20px;
+  padding: 10px;
+  margin-top: -5px; /* hide behind labels */
+  color: black;
+  font-size: 22px;
+  display: none;
+  z-index:6;
+}
+
+nav .tab-content hr{
+  margin:0;
+  margin-bottom: 10px;
+  border:1px solid black;
+}
+nav .tab-content li{
+  display: inline-block;
+  list-style-type: none;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+/* --- SHOW ONLY SELECTED CONTENT --- */
+nav #cat1:checked ~ .content1 { display: block; }
+nav #cat2:checked ~ .content2 { display: block; }
+nav #cat3:checked ~ .content3 { display: block; }
+nav #cat4:checked ~ .content4 { display: block; }
+
+
+
+
+
+
+/* nav {
+  width:380px;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  padding: 10px 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 1em;
+  line-height: 1.4;
+}
+nav p,
+nav ul{
+  display: inline-block;
+  margin:0.2em 0;
+  font-size: 1.3em;
+  padding:0;
+}
+nav p{
+  vertical-align: top;
+}
+nav ul{
+  max-width: calc(100% - 90px); /* leave space for <p> */
+/*}
+nav ul li{
+  display: inline-block;
+}
+nav hr{
+  margin: 0;
+} */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+article {
+  background-color: #fff;
+  border-radius: 12px;
+  width: 100%;
+  min-height: 100vh;
+  /* margin-top: 40px; */
+  /* box-shadow: inset 0 0 0 2px rgba(255,255,255,0.4); */
+  /* transform: translatey(-140px); */
+  margin-top:-105px;
+  filter:drop-shadow(8px 6px 8px #d86c4e) drop-shadow(-1px -1px 7px #dd6f51);
+}
+article::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border-radius: 8px;
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.00), rgba(0,0,0,0.00));
+  /* placeholder if you want to overlay a drawn PNG border later */
+}
+article .main{
+  padding: 20px;
+  padding-top: 75px;
+  padding-bottom: 30px;
+}
+article .main p{
+  text-align: left;
+}
+article .main img{
+  width:100%;
+  height:auto;
+  text-align: center;
+}
+/* center logo placed near the bottom of the white box */
+/* drop-in your logo file at src="logo-center.png" in HTML; adjust size below */
+.center-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translatey(25px);
+  bottom: 0;
+  width: 200px;
+  height: auto;
+  z-index: 3;
+}
+
+
+
+
+/* make sure header elements sit above the decorative stripes */
+header, .date, .info-box, .logo {
+  position: relative;
+  z-index: 4;
+}
+
+
+
+
+/* Responsive adjustments */
+@media (max-width: 800px) {
+  body{
+    padding:0;
+    margin-top:130px;
+    min-height: auto;
+  }
+  .padding{display: none;}
+  div.page{
+    margin:0;
+    width:95%;
+  }
+  header.pc{display: none;}
+  header.mobile{
+    background-color: #FF000088;
+    position:absolute;
+    top:0;
+    left:0;
+    width:100vw;
+    transform: none;
+  }
+
+  /* HIDE CHECKBOX */
+  .menu-toggle {  
+    display: none;
+  }
+
+  /* HEADER */
+  header.mobile {
+    position: fixed;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* LOGO CENTERED */
+  header.mobile .logo img {
+    margin-top:4px;
+    height: 40px;
+    width: auto;
+  }
+
+  /* HAMBURGER ICON */
+  header.mobile .hamburger {
+    position: absolute;
+    right: 16px;
+    padding: 5px;
+    /* top: 12px; */
+    /* width: 32px; */
+    /* height: 32px; */
+    cursor: pointer;
+  }
+
+  header.mobile .hamburger span {
+    display: block;
+    width: 26px;
+    height: 3px;
+    background: #333;
+    margin: 5px 0;
+    border-radius: 2px;
+    
+    /* Animation smoothness */
+    transition: 
+      transform .3s ease,
+      opacity .3s ease;
+  }
+
+  /* SLIDE MENU BOX */
+  header.mobile nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -80%;
+    width: 80%;
+    height: 100vh;
+    background: #fff;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    margin-top:60px;
+    transition: right .3s ease;
+    z-index: 1000;
+  }
+
+  /* WHEN CHECKBOX IS CHECKED → SLIDE IN */
+  header.mobile .menu-toggle:checked ~ nav {
+    display: block;
+    right: 0;
+  }
+
+  /* CLOSE BUTTON */
+  header.mobile .close-btn {
+    font-size: 26px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    float: right;
+    margin-bottom: 10px;
+  }
+
+/* --- ANIMATION WHEN CHECKED (Hamburger → X) --- */
+
+.menu-toggle:checked + .hamburger span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle:checked + .hamburger span:nth-child(2) {
+  opacity: 0;   /* middle bar fades */
+}
+
+.menu-toggle:checked + .hamburger span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* --- OPTIONAL COLOR CHANGE WHEN ACTIVE --- */
+.menu-toggle:checked + .hamburger span {
+  background: #000;
+}
+
+
+  /* MENU CONTENT SPACING */
+  header.mobile .menu-content {
+    margin-top: 40px;
+  }
+
+  nav{
+    margin-top:0;
+  }
+
+  .page{
+    width:auto;
+    padding:0 10px;
+  }
+  article{
+    /* width: 100vw; */
+    /* margin-top:50px; */
+    min-height: calc(100vw - 50px);
+  }
+  article div.main{
+    margin-top:50px;
+    padding-top:10px;
+  }
+
+
+  
+  /* Scroll bar hack */
+  /* --- Chrome / Edge / Opera --- */
+html {
+  scrollbar-width: none; /* --- Firefox --- */
+}
+
+}
+
+
+
+
+/* Fonts */
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Black.woff2') format('woff2');
+    font-weight: Black;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Bold.woff2') format('woff2');
+    font-weight: Bold;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Pretendard';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/pretendard@1.0/Pretendard-Medium.woff2') format('woff2');
+    font-weight: medium;
+    font-display: swap;
+}
