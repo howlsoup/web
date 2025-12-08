@@ -9,12 +9,20 @@ body {
   padding-bottom:20px;
   font-family: 'Pretendard', 'NanumGothic', 'Malgun Gothic', sans-serif;
   font-weight: medium;
+  word-break:keep-all;
 }
 
 
 
-
 /* HEADER > LOGO */
+header a:link,
+header a:visited{
+  display: block;
+  text-decoration: none;
+  color:black;
+  width: 100%;
+  height: 100%;;
+}
 header.pc {
   width: 700px;
   height: 70px;
@@ -55,7 +63,8 @@ header.mobile{
   margin: 0;
   display: flex;
   background: #fff6;
-  gap: 8px;
+  gap: 5px;
+  justify-content: flex-end;
 }
 
 .menu li {
@@ -64,7 +73,6 @@ header.mobile{
   padding: 10px 16px;
   cursor: pointer;
   border-radius: 12px 12px 0 0;
-  transition: background .25s;
 }
 
 .menu li:hover {
@@ -82,7 +90,7 @@ header.mobile{
   padding: 10px;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  min-width: 140px;
+  /* min-width: 140px; */
 }
 
 /* --- Show submenu on hover --- */
@@ -107,7 +115,7 @@ header.mobile{
 
 /* --- WRAPPER --- */
 nav {
-  width: 350px;
+  width: 450px;
   margin-top: 15px;
 }
 
