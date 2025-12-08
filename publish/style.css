@@ -12,6 +12,56 @@ body {
   word-break:keep-all;
 }
 
+/* Link icons */
+  /* every link */
+.main a[href] {
+  text-decoration: underline;
+  color: inherit;
+  position: relative;
+  padding-left: 1.2em;    /* space for left icon */
+}
+
+/* left icon: clip/link */
+.main a[href]::before {
+  content: "link";
+  font-family: "Material Symbols Outlined";
+  font-size: 0.8em;
+
+  background:#0a9e46;
+  color:white;
+  border-radius:4px;
+  padding:1px 2px;
+
+  position:absolute;
+  left:0;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+/* right icon: open_in_new — only for external links */
+.main a[href^="http"]:not([href*="howlsoup.kr"])::after {
+  content:"open_in_new";
+  font-family:"Material Symbols Outlined";
+  font-size:0.9em;
+
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  color: currentColor;  /* uses link color */
+}
+
+    /* If link contains an image → remove left & right icons */
+.main a:has(img)::before,
+.main a:has(img)::after {
+  content: none !important;
+  padding: 0;
+}
+.main a:has(img) {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  position: static; /* optional if you want the default behavior */
+}
+
 
 
 /* HEADER > LOGO */
@@ -23,7 +73,7 @@ header a:visited{
   width: 100%;
   height: 100%;;
 }
-header.pc {
+header {
   width: 700px;
   height: 70px;
   padding: 0 100vw;
@@ -34,10 +84,10 @@ header.pc {
   position: relative;
 }
 
-header.pc .logo{
+header .logo{
   transform: translateY(10px);
 }
-header.pc .logo img{
+header .logo img{
   height: 55px;
   margin-left: 10px;
 }
@@ -49,15 +99,15 @@ header.pc .logo img{
   font-size: 1em;
   color: #000;
 }
-header.mobile{
+header .mobile{
   display: none;
 }
 
 
 
-/* pc */
+/* menu */
 
-.menu ul {
+nav ul {
   list-style: none;
   padding: 0;
   margin: 0;
@@ -67,20 +117,23 @@ header.mobile{
   justify-content: flex-end;
 }
 
-.menu li {
+nav li {
   transform: translateY(2px);
   position: relative;
   padding: 10px 16px;
   cursor: pointer;
   border-radius: 12px 12px 0 0;
 }
+nav li:has(b) {
+  cursor:auto;
+}
 
-.menu li:hover {
+nav li:hover {
   background: #fff;
 }
 
 /* --- Submenu hidden by default --- */
-.menu .sub {
+nav .sub {
   display: none;
   position: absolute;
   left: 0;
@@ -94,19 +147,27 @@ header.mobile{
 }
 
 /* --- Show submenu on hover --- */
-.menu li:hover > .sub {
+nav li:hover > .sub {
   display: block;
 }
 
 /* submenu items */
-.menu .sub li {
+nav .sub li {
   padding: 8px 10px;
   border-radius: 8px;
   white-space: nowrap;
 }
 
-.menu .sub li:hover {
+nav .sub li:hover {
   background: #ffe1c2;
+}
+nav .sub li:hover:has(b){
+  background: inherit;
+}
+
+nav li a:link .material-symbols-outlined{
+  font-size:12px;
+  margin-left: 5px;
 }
 
 
@@ -189,12 +250,6 @@ nav .tab-content li{
   padding: 2px;
 }
 
-/* --- SHOW ONLY SELECTED CONTENT --- */
-nav #cat1:checked ~ .content1 { display: block; }
-nav #cat2:checked ~ .content2 { display: block; }
-nav #cat3:checked ~ .content3 { display: block; }
-nav #cat4:checked ~ .content4 { display: block; }
-
 
 
 
@@ -262,6 +317,29 @@ header, .date, .info-box, .logo {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Responsive adjustments */
 @media (max-width: 800px) {
   body{
@@ -273,40 +351,44 @@ header, .date, .info-box, .logo {
     margin:0;
     width:95%;
   }
-  header.pc{display: none;}
-  header.mobile{
+  header .mobile{
+    display: block;
+  }
+
+  /* HIDE CHECKBOX */
+  input.menu {  
+    display: none;
+  }
+
+  /* HEADER */
+  header {
+    height:auto;
     background-color: white;
-    position:absolute;
+    position: fixed;
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     top:0;
     left:0;
     width:100vw;
     transform: none;
   }
 
-  /* HIDE CHECKBOX */
-  .menu-toggle {  
-    display: none;
-  }
-
-  /* HEADER */
-  header.mobile {
-    position: fixed;
-    padding: 6px 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
   /* LOGO CENTERED */
-  header.mobile .logo img {
-    transform: translateY(-2px);
+  header .logo{
+    transform: none;
+  }
+  header .logo img {
+    /* transform: translateY(-2px); */
     margin-top:4px;
     height: 40px;
     width: auto;
+    margin-left:0;
   }
 
   /* HAMBURGER ICON */
-  header.mobile .hamburger {
+  header .hamburger {
     position: absolute;
     right: 16px;
     padding: 5px;
@@ -316,7 +398,7 @@ header, .date, .info-box, .logo {
     cursor: pointer;
   }
 
-  header.mobile .hamburger span {
+  header .hamburger span {
     display: block;
     width: 26px;
     height: 3px;
@@ -331,13 +413,13 @@ header, .date, .info-box, .logo {
   }
 
   /* SLIDE MENU BOX */
-  header.mobile nav {
+  header nav {
     display: none;
     position: fixed;
     top: 0;
     right: -80%;
     width: 80%;
-    height: 100vh;
+    height: calc(100vh - 100px);
     background: #fff;
     box-shadow: -3px 0 10px rgba(0,0,0,0.2);
     padding: 20px;
@@ -347,13 +429,13 @@ header, .date, .info-box, .logo {
   }
 
   /* WHEN CHECKBOX IS CHECKED → SLIDE IN */
-  header.mobile .menu-toggle:checked ~ nav {
+  header input.menu:checked ~ nav {
     display: block;
     right: 0;
   }
 
   /* CLOSE BUTTON */
-  header.mobile .close-btn {
+  header .close-btn {
     font-size: 26px;
     border: none;
     background: none;
@@ -364,40 +446,52 @@ header, .date, .info-box, .logo {
 
 /* --- ANIMATION WHEN CHECKED (Hamburger → X) --- */
 
-.menu-toggle:checked + .hamburger span:nth-child(1) {
+input.menu:checked + .hamburger span:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
 
-.menu-toggle:checked + .hamburger span:nth-child(2) {
+input.menu:checked + .hamburger span:nth-child(2) {
   opacity: 0;   /* middle bar fades */
 }
 
-.menu-toggle:checked + .hamburger span:nth-child(3) {
+input.menu:checked + .hamburger span:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
 
 /* --- OPTIONAL COLOR CHANGE WHEN ACTIVE --- */
-.menu-toggle:checked + .hamburger span {
+input.menu:checked + .hamburger span {
   background: #000;
 }
 
 
-  /* MENU CONTENT SPACING */
+nav{
+  margin-top:0;
+  overflow-y: scroll;
+}
+nav ul{
+  display: block;
+}
+nav li{
+  cursor: auto;
+}
+nav .sub{
+  display: block;
+  position: relative;
+  box-shadow: none;
+  padding-left: 1em;
+}
 
-  nav{
-    margin-top:0;
-  }
+/* MENU CONTENT SPACING */
 
-  
-  article{
-    /* width:auto; */
-    margin-top: -60px;
-    /* padding:0 10px; */
-    min-height: calc(100vw - 50px);
-  }
-  article div.main{
-    padding-top:10px;
-  }
+article{
+  /* width:auto; */
+  margin-top: -60px;
+  /* padding:0 10px; */
+  min-height: calc(100vw - 50px);
+}
+article div.main{
+  padding-top:10px;
+}
 
 
 
