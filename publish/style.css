@@ -16,9 +16,11 @@ body {
   /* every link */
 .main a[href] {
   text-decoration: underline;
+  text-decoration-color: #FD5F52;
   color: inherit;
   position: relative;
-  padding-left: 1.2em;    /* space for left icon */
+  padding-left: 1.1em;    /* space for left icon */
+  padding-right: 0; /* no reserved space needed now */
 }
 
 /* left icon: clip/link */
@@ -27,7 +29,7 @@ body {
   font-family: "Material Symbols Outlined";
   font-size: 0.8em;
 
-  background:#0a9e46;
+  background:#FD5F52;
   color:white;
   border-radius:4px;
   padding:1px 2px;
@@ -39,15 +41,17 @@ body {
 }
 
 /* right icon: open_in_new — only for external links */
-.main a[href^="http"]:not([href*="howlsoup.kr"])::after {
+.main a[href^="http"]:not([href*="howlsoup.kr"])::after,
+.main a[href^="mailto"]::after {
   content:"open_in_new";
   font-family:"Material Symbols Outlined";
   font-size:0.9em;
 
-  position:absolute;
-  top:50%;
-  transform:translateY(-50%);
-  color: currentColor;  /* uses link color */
+  position: static;
+  display: inline-block;
+  transform: none;
+  text-decoration: underline;
+  text-decoration-color: #FD5F52;
 }
 
     /* If link contains an image → remove left & right icons */
@@ -55,11 +59,13 @@ body {
 .main a:has(img)::after {
   content: none !important;
   padding: 0;
+  text-decoration: none;
 }
 .main a:has(img) {
   padding-left: 0 !important;
   padding-right: 0 !important;
   position: static; /* optional if you want the default behavior */
+  text-decoration: none;
 }
 
 
@@ -70,8 +76,8 @@ header a:visited{
   display: block;
   text-decoration: none;
   color:black;
-  width: 100%;
-  height: 100%;;
+  /* width: 100%;
+  height: 100%; */
 }
 header {
   width: 700px;
@@ -126,6 +132,7 @@ nav li {
 }
 nav li:has(b) {
   cursor:auto;
+  padding: 10px 16px;
 }
 
 nav li:hover {
@@ -152,20 +159,23 @@ nav li:hover > .sub {
 }
 
 /* submenu items */
-nav .sub li {
+nav .sub a,
+nav .sub b{
+  display: block;
   padding: 8px 10px;
   border-radius: 8px;
   white-space: nowrap;
 }
 
-nav .sub li:hover {
+nav .sub a:hover {
   background: #ffe1c2;
 }
-nav .sub li:hover:has(b){
-  background: inherit;
+
+nav .sub li{
+  padding:0;
 }
 
-nav li a:link .material-symbols-outlined{
+nav .sub li a:link .material-symbols-outlined{
   font-size:12px;
   margin-left: 5px;
 }
@@ -412,13 +422,32 @@ header, .date, .info-box, .logo {
       opacity .3s ease;
   }
 
+  /* close nav when touched outer nav */
+  header .hamburger-close{
+    display: none;
+    opacity:0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    /* display: block; */
+    width: 100vw;
+    height: calc(100vh - 100px);
+    background: #fff;
+    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    margin-top: 60px;
+    transition: right .3s ease;
+    z-index: 999;
+  }
+
   /* SLIDE MENU BOX */
   header nav {
     display: none;
     position: fixed;
     top: 0;
     right: -80%;
-    width: 80%;
+    /* width: 80%; */
+    width: 250px;
     height: calc(100vh - 100px);
     background: #fff;
     box-shadow: -3px 0 10px rgba(0,0,0,0.2);
@@ -429,9 +458,12 @@ header, .date, .info-box, .logo {
   }
 
   /* WHEN CHECKBOX IS CHECKED → SLIDE IN */
-  header input.menu:checked ~ nav {
-    display: block;
+  header input.menu:checked ~ nav{
+    display:block;
     right: 0;
+  }
+  header input.menu:checked ~ .mobile.hamburger-close{
+    display: block;
   }
 
   /* CLOSE BUTTON */
