@@ -15,8 +15,9 @@ body {
 /* Link icons */
   /* every link */
 .main a[href] {
-  text-decoration: underline;
-  text-decoration-color: #FD5F52;
+  white-space: nowrap;
+  text-decoration: underline 2px;
+  text-decoration-color: #F90;
   color: inherit;
   position: relative;
   padding-left: 1.1em;    /* space for left icon */
@@ -24,12 +25,12 @@ body {
 }
 
 /* left icon: clip/link */
-.main a[href]::before {
-  content: "link";
+.main a[href]::before,
+.main a[href^="mailto"]::before {
   font-family: "Material Symbols Outlined";
   font-size: 0.8em;
 
-  background:#FD5F52;
+  background:#F90;
   color:white;
   border-radius:4px;
   padding:1px 2px;
@@ -38,6 +39,12 @@ body {
   left:0;
   top:50%;
   transform:translateY(-50%);
+}
+.main a[href]::before{
+  content: "link";
+}
+.main a[href^="mailto"]::before {
+  content: "mail";
 }
 
 /* right icon: open_in_new — only for external links */
@@ -50,8 +57,8 @@ body {
   position: static;
   display: inline-block;
   transform: none;
-  text-decoration: underline;
-  text-decoration-color: #FD5F52;
+  text-decoration: underline 2px;
+  text-decoration-color: #F90;
 }
 
     /* If link contains an image → remove left & right icons */
@@ -422,6 +429,7 @@ header, .date, .info-box, .logo {
     padding:0;
     margin-top:130px;
     min-height: auto;
+    padding-bottom: 40px;
   }
   article{
     margin:0;
@@ -472,6 +480,7 @@ header, .date, .info-box, .logo {
     /* width: 32px; */
     /* height: 32px; */
     cursor: pointer;
+    z-index: 9999;
   }
 
   header .hamburger span {
@@ -488,6 +497,23 @@ header, .date, .info-box, .logo {
       opacity .3s ease;
   }
 
+  /* SLIDE MENU BOX */
+  header nav {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: -80%;
+    /* width: 80%; */
+    width: 250px;
+    height: 100dvh;
+    background: #fff;
+    box-shadow: -3px 0 10px rgba(0,0,0,0.2);
+    padding: 20px;
+    transition: right .3s ease;
+    z-index: 1000;
+    box-sizing: border-box;
+  }
+  
   /* close nav when touched outer nav */
   header .hamburger-close{
     display: none;
@@ -498,29 +524,12 @@ header, .date, .info-box, .logo {
     /* display: block; */
     width: 100vw;
     height: calc(100vh - 100px);
-    background: #fff;
-    box-shadow: -3px 0 10px rgba(0, 0, 0, 0.2);
+    background: #000;
+    opacity: 0.1;
     padding: 20px;
     margin-top: 60px;
     transition: right .3s ease;
     z-index: 999;
-  }
-
-  /* SLIDE MENU BOX */
-  header nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    right: -80%;
-    /* width: 80%; */
-    width: 250px;
-    height: calc(100vh - 100px);
-    background: #fff;
-    box-shadow: -3px 0 10px rgba(0,0,0,0.2);
-    padding: 20px;
-    margin-top:60px;
-    transition: right .3s ease;
-    z-index: 1000;
   }
 
   /* WHEN CHECKBOX IS CHECKED → SLIDE IN */
