@@ -264,7 +264,73 @@ nav .tab-content li{
 
 
 
+/* nav coming soon */
+nav a[href="#"] {
+  color: #ccc;
+}
 
+/* bubble (right-to-left placement) */
+nav a[href="#"]::after {
+  content: attr(data-comingsoon);   /* tooltip text comes from data-tooltip */
+  position: absolute;
+  right: calc(100% + 10px);      /* sit to the left of the link */
+  top: 50%;
+  transform: translateY(-50%) scale(.95);
+  transform-origin: right center;
+  white-space: nowrap;           /* prevent wrapping; remove if you want multiple lines */
+  padding: .45rem .6rem;
+  border-radius: .45rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  background: #111;              /* bubble background */
+  color: #fff;                   /* bubble text color */
+  box-shadow: 0 6px 18px rgba(0,0,0,.15);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .14s ease, transform .14s ease;
+  z-index: 30;
+}
+
+/* little arrow pointing right (so bubble points to link) */
+nav a[href="#"]::before {
+  content: "";
+  position: absolute;
+  right: 100%;                    /* align at the left edge of link */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-left-color: #111;        /* matches bubble background */
+  opacity: 0;
+  transition: opacity .14s ease;
+  z-index: 31;
+}
+
+/* show on hover OR when focused for keyboard users */
+nav a[href="#"]:hover::after,
+/* nav a[href="#"]:focus::after, */
+nav a[href="#"]:hover::before{
+/* nav a[href="#"]:focus::before { */
+  opacity: 1;
+  transform: translateY(-50%) scale(1);
+}
+
+/* small responsive tweak: if the bubble would overflow the left edge,
+   flip it to the right side using a helper class (optional) */
+nav a[href="#"].flip::after {
+  right: auto;
+  left: calc(100% + 10px);
+  transform-origin: left center;
+}
+nav a[href="#"].flip::before {
+  right: auto;
+  left: 100%;
+  border-left-color: transparent;
+  border-right-color: #111;
+  margin-right: 0;
+  margin-left: 4px;
+}
 
 
 
@@ -511,6 +577,18 @@ nav .sub{
   position: relative;
   box-shadow: none;
   padding-left: 1em;
+}
+
+
+/* bubble centered over the link */
+nav a[href="#"]::after {
+  width:100%;
+  left: 0;
+}
+
+/* hide the small arrow completely */
+nav a[href="#"]::before {
+  display: none;
 }
 
 /* MENU CONTENT SPACING */
